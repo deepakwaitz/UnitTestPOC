@@ -1,6 +1,7 @@
 package com.junit.poc.api
 
 import android.content.Context
+import com.junit.poc.utils.Constants
 import com.junit.poc.utils.Constants.Companion.HTTP_CONNECTION_TIMEOUT
 import com.junit.poc.utils.Constants.Companion.HTTP_READ_TIMEOUT
 import com.junit.poc.utils.Constants.Companion.HTTP_WRITE_TIMEOUT
@@ -19,11 +20,11 @@ class APIServiceFactory {
             _apiService = service
         }
 
-        fun getApiService(baseUrl: String): APIService {
-            return _apiService ?: buildRetrofitForService(baseUrl).create(APIService::class.java)
+        fun getApiService(): APIService {
+            return _apiService ?: buildRetrofitForService().create(APIService::class.java)
         }
 
-        private fun buildRetrofitForService(baseUrl: String): Retrofit {
+        private fun buildRetrofitForService(): Retrofit {
             val logging = HttpLoggingInterceptor()
             if (BuildConfig.DEBUG) {
                 logging.level = HttpLoggingInterceptor.Level.BODY
@@ -40,7 +41,7 @@ class APIServiceFactory {
                 .build()
 
             return Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(Constants.BASE_URL)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

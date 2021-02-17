@@ -6,14 +6,16 @@ plugins {
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
-
+    buildFeatures {
+        dataBinding = true
+    }
     defaultConfig {
         applicationId "com.junit.poc"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -79,7 +81,7 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter:$junit5_version"
     testRuntimeOnly "org.junit.vintage:junit-vintage-engine:$junit5_version"
 
-    androidTestImplementation 'info.cukes:cucumber-android:1.2.6@jar'
+   // androidTestImplementation 'info.cukes:cucumber-android:1.2.6@jar'
     androidTestImplementation 'info.cukes:cucumber-picocontainer:1.2.6'
 
 
