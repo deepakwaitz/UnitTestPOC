@@ -5,6 +5,7 @@ buildscript {
         espresso_version = '3.3.0'
         glide_version = '4.11.0'
         junit5_version = '5.6.2'
+        cucumber_javaVersion = '4.8.1'
         koin_version = '2.1.6'
         kotlin_version = '1.4.10'
         lifecycle_version = '2.2.0'
@@ -17,23 +18,43 @@ buildscript {
     repositories {
         google()
         jcenter()
+        mavenLocal()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+        maven { url 'https://jitpack.io' }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.21.2"
+        classpath "com.github.marcphilipp.nexus-publish-plugin:nexus-publish-plugin:0.4.0"
+        classpath 'digital.wup:android-maven-publish:3.6.3'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
-
+apply plugin: 'io.codearte.nexus-staging'
+nexusStaging {
+    if (project.hasProperty('ossrhUsername')){
+        username = ossrhUsername
+        password = ossrhPassword
+    }
+}
 allprojects {
     repositories {
         google()
         jcenter()
     }
 }
+subprojects { subproject ->
 
+
+    ext.addAndroidConfig ={
+
+
+
+    }
+}
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

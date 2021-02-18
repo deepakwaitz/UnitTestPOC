@@ -18,7 +18,6 @@ class UserRepository:BaseRepository() {
             }
             throw APIError("Unable to get user details ", null, cause)
         }
-
         return result
     }
 }

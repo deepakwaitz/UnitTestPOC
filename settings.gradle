@@ -1,2 +1,3 @@
+include ':cucumber-android'
 include ':app'
 rootProject.name = "POC"

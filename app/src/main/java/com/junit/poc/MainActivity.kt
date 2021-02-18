@@ -13,9 +13,11 @@ class MainActivity : AppCompatActivity() {
 
     val userViewModel: UserViewModel by viewModel()
     lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
         binding.lifecycleOwner = this
         binding.userViewModel = userViewModel
 
